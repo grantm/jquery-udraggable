@@ -1,0 +1,39 @@
+{
+    "name": "udraggable",
+    "title": "jQuery udraggable",
+    "description": "jQuery plugin for making elements draggable with both mouse and touch support.  A (tiny) subset of the functionality of jQueryUI's 'draggable' widget, but with touch support added.",
+    "keywords": [
+        "drag",
+        "touch",
+    ],
+    "version": "0.1.0",
+    "author": {
+        "name": "Grant McLean",
+        "email": "grant@mclean.net.nz",
+        "url": "https://github.com/grantm"
+    },
+    "maintainers": [
+        {
+            "name": "Grant McLean",
+            "email": "grant@mclean.net.nz",
+            "url": "https://github.com/grantm"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/grantm/jquery-udraggable/blob/master/LICENSE"
+        },
+        {
+            "type": "GPLv3",
+            "url": "https://github.com/grantm/jquery-udraggable/blob/master/LICENSE"
+        }
+    ],
+    "bugs": "https://github.com/grantm/jquery-udraggable/issues",
+    "homepage": "http://grantm.github.com/jquery-udraggable/",
+    "docs": "http://grantm.github.com/jquery-udraggable/",
+    "demo": "http://grantm.github.com/jquery-udraggable/#examples",
+    "dependencies": {
+        "jquery": ">=1.7"
+    }
+}
