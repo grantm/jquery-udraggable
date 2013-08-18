@@ -47,6 +47,15 @@ p.example-link {
   padding: 30px;
 }
 
+#try-drag {
+  position: absolute;
+  left: 295px;
+  top: 5px;
+  width: 256px;
+  height: 74px;
+  background-image: url(../img/try-dragging.png)
+}
+
 #star {
   position: absolute;
   left: 295px;
