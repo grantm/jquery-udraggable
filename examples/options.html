@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>jQuery.udraggable: Options</title>
+  <link rel="stylesheet" type="text/css" href="examples.css">
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="../jquery.event.ue.js"></script>
+  <script type="text/javascript" src="../jquery.udraggable.js"></script>
+</head>
+<body>
+
+  <h1><a href="../">jQuery.udraggable</a>: Options</h1>
+
+  <p>The following examples illustrate the use of various options.</p>
+
+  <table class="options-list">
+
+    <tr>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="defaults"></a>Default behaviour.</p>
+        <pre class="code">$('#drag1').udraggable();</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag1"></div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="constr-parent"></a>Constrain drag to within parent
+        element.</p>
+        <pre class="code">$('#drag2').udraggable({
+    containment: 'parent'
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag2"></div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="constr-rect"></a>Constrain drag to a specified
+        rectangular area.</p>
+        <pre class="code">$('#drag3').udraggable({
+    containment: [ 40, 40, 180, 170]
+});</pre>
+        <p><em>Note: the coordinates constrain the possible positions of the
+        top left corner of the draggable element</em></p>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag3"></div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="constr-grid"></a>Constrain position of dragged item to
+        a 30px by 30px grid.</p>
+        <pre class="code">$('#drag4').udraggable({
+    containment: [ 0, 0, 270, 210],
+    grid:        [ 30, 30 ]
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag4"></div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="constr-axis"></a>Apply draggable behaviour to multiple
+        elements at one time.  Red elements can only be dragged on the "y"
+        axis (up and down).  Green elements can only be dragged on the "x"
+        access (left and right).</p>
+        <pre class="code">$('.blk-red').udraggable({
+    containment: 'parent',
+    axis:        'y'
+});
+
+$('.blk-green').udraggable({
+    containment: 'parent',
+    axis:        'x'
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag5" class="blk-green"></div>
+          <div id="drag6" class="blk-red"></div>
+          <div id="drag7" class="blk-green"></div>
+          <div id="drag8" class="blk-red"></div>
+          <div id="drag9" class="blk-green"></div>
+          <div id="drag10" class="blk-red"></div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="map-pan"></a>Constrain drag to a rectangular area larger
+        than the containing element.  The parent element uses the
+        "<code>overflow: hidden</code>" style to apply a clipping region.</p>
+        <pre class="code">$('#map').udraggable({
+    containment: [ -960, -395, 0, 0]
+});</pre>
+      </td>
+      <td>
+        <div id="map-container" class="arena">
+          <div id="map"></div>
+        </div>
+        <div><em><a href="http://commons.wikimedia.org/wiki/File:World_Map.jpg">Map
+        source</a></em></div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="drag-in-drag"></a>It is of course possible to drag an
+        element that contains draggable elements.</p>
+        <pre class="code">$('#drag11').udraggable({
+    containment: 'parent'
+});
+
+$('.sub-drag').udraggable({
+    containment: 'parent'
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag11">
+            <div id="drag12" class="sub-drag"></div>
+            <div id="drag13" class="sub-drag"></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="callbacks"></a>The 'start', 'stop' and 'drag' options
+        allow you to monitor the progress of a drag through callback functions.
+         The item being dragged will also have the "<code>udraggable-dragging</code>"
+         class applied to it automatically - you can use CSS to take advantage
+         of this.</p>
+        <p>This example also sets the <code>distance</code> threshold.  The
+        drag operation will not start until the pointer has been moved at
+        least 15px after the initial touchstart / mousedown.</p>
+        <pre class="code">$('#drag14').udraggable({
+    distance: 15,
+    containment: 'parent',
+    start: function() {
+      $('#stat-mode').text('Dragging');
+    },
+    stop: function() {
+      $('#stat-mode').text('Idle');
+    },
+    drag: function(e, ui) {
+      var pos = ui.position
+      $('#stat-x').text(pos.left);
+      $('#stat-y').text(pos.top);
+    }
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag14"></div>
+          <div id="status-bar">
+            <span class="label" id="lbl-mode">Mode:</span>
+            <span class="value" id="stat-mode">Idle</span>
+            <span class="label" id="lbl-x">X:</span>
+            <span class="value" id="stat-x">105</span>
+            <span class="label" id="lbl-y">Y:</span>
+            <span class="value" id="stat-y">135</span>
+          </div>
+        </div>
+      </td>
+    </tr>
+
+  </table>
+
+  <p>[<a href="../">Home</a>]</p>
+
+  <script type="text/javascript">
+
+    $('#drag1').udraggable();
+
+    $('#drag2').udraggable({
+        containment: 'parent'
+    });
+
+    $('#drag3').udraggable({
+        containment: [ 40, 40, 180, 170]
+    });
+
+    $('#drag4').udraggable({
+        containment: [ 0, 0, 270, 210],
+        grid:        [ 30, 30 ]
+    });
+
+    $('.blk-red').udraggable({
+        containment: 'parent',
+        axis:        'y'
+    });
+
+    $('.blk-green').udraggable({
+        containment: 'parent',
+        axis:        'x'
+    });
+
+    $('#map').udraggable({
+        containment: [ -980, -395, 0, 0]
+    });
+
+    $('#drag11').udraggable({
+        containment: 'parent'
+    });
+
+    $('.sub-drag').udraggable({
+        containment: 'parent'
+    });
+
+    $('#drag14').udraggable({
+        distance: 15,
+        containment: 'parent',
+        start: function() {
+          $('#stat-mode').text('Dragging');
+        },
+        stop: function() {
+          $('#stat-mode').text('Idle');
+        },
+        drag: function(e, ui) {
+          var pos = ui.position
+          $('#stat-x').text(pos.left);
+          $('#stat-y').text(pos.top);
+        }
+    });
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+
+body {
+  font-family: sans-serif;
+  color: #333333;
+  padding: 1em 1em 5em 1em;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+p {
+  line-height: 1.3;
+}
+
+pre.code {
+  margin: 2em 1em 2em 0;
+  padding: 1.3em;
+  border: 1px solid #aaaaaa;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+table.options-list {
+  border-collapse: collapse;
+}
+
+table.options-list th {
+  padding: 1.4em 2em 0.4em 0;
+  border-bottom: 1px solid #aaaaaa;
+}
+
+table.options-list td {
+  border-bottom: 1px solid #aaaaaa;
+  padding: 1em;
+}
+
+table.options-list td:first-child {
+  vertical-align: top;
+  max-width: 40em;
+  border-right: 1px solid #aaaaaa;
+}
+
+.arena {
+  position: relative;
+  width: 300px;
+  height: 240px;
+  background-color: #ffffee;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+#drag1,
+#drag2,
+#drag3,
+#drag4,
+#drag14,
+.sub-drag {
+  position: absolute;
+  top: 105px;
+  left: 135px;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #6666cc;
+  background-color: #ccccff;
+  border-radius: 4px;
+}
+
+#drag4 {
+  top: 0;
+  left: 0;
+}
+
+.blk-red {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #cc6666;
+  background-color: #ffcccc;
+  border-radius: 4px;
+}
+
+.blk-green {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #66cc66;
+  background-color: #ccffcc;
+  border-radius: 4px;
+}
+
+#drag5 { top:  33px; left: 125px; }
+#drag6 { top: 180px; left:  77px; }
+#drag7 { top: 110px; left:  16px; }
+#drag8 { top:  79px; left: 270px; }
+#drag9 { top: 150px; left: 230px; }
+#drag10 { top:  7px; left: 169px; }
+
+#map-container {
+  overflow: hidden;
+  border: 1px solid #777777;
+}
+
+#map {
+  position: absolute;
+  left: -460px;
+  top: -60px;
+  width: 1280px;
+  height: 635px;
+  background-image: url(images/world-map.jpg);
+}
+
+#drag11 {
+  position: absolute;
+  border: 4px solid #339933;
+  border-radius: 4px;
+  width: 150px;
+  height: 120px;
+  top: 30px;
+  left: 60px;
+}
+#drag12 { top:  60px; left: 30px; }
+#drag13 { top:  30px; left: 90px; }
+
+#drag14.udraggable-dragging {
+  border: 2px solid #cc6666;
+  background-color: #ffcccc;
+  box-shadow: 1px 1px 3px 3px rgba(100, 100, 100, 0.3);
+}
+
+#status-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 24px;
+  font-size: 16px;
+  line-height: 1.4;
+  background-color: #666666;
+  color: #cccccc;
+}
+
+#status-bar .value {
+  color: #ffffff;
+}
+
+#status-bar span {
+  position: absolute;
+  bottom: 1px;
+}
+
+#lbl-mode  { left:  10px; }
+#stat-mode { left:  63px; }
+#lbl-x     { left: 165px; }
+#stat-x    { left: 185px; }
+#lbl-y     { left: 237px; }
+#stat-y    { left: 257px; }
+
