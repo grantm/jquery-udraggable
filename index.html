@@ -81,14 +81,17 @@
             scrolling on touch devices.  This can work fine if the web
             application fills the full screen and uses touch/mouse events to
             adjust element positioning to achieve scrolling.  This page and the
-            associated example pages use an experimental modified version of
-            the plugin which supports scrolling and dragging (test by dragging
+            associated example pages use an <a
+            href="jquery.event.ue.js">experimental modified version</a> of the
+            plugin which supports both scrolling and dragging (test by dragging
             the star above).</p>
 
             <p><strong>Selection:</strong> When dragging an element, the
             click-drag-release sequence can have the side-effect of selecting
-            text in the vicinity.  To avoid the visual flash, set the CSS
-            property <code>"user-select: none"</code>.</p>
+            text in the vicinity.  To avoid the visual flash, you can set the
+            CSS property <code>"user-select: none"</code>.  Alternatively, the
+            experimental version of the jquery.event.ue plugin (linked above)
+            also seems to fix this issue.</p>
 
             <h1 id="reference">Reference Documentation</h1>
 

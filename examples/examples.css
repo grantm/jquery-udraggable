@@ -3,9 +3,6 @@ body {
   font-family: sans-serif;
   color: #333333;
   padding: 1em 1em 5em 1em;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
 }
 
 p {
