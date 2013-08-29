@@ -4,7 +4,7 @@
     "description": "jQuery plugin for making elements draggable with both mouse and touch support.  A (tiny) subset of the functionality of jQueryUI's 'draggable' widget, but with touch support added.",
     "keywords": [
         "drag",
-        "touch",
+        "touch"
     ],
     "version": "0.1.0",
     "author": {
