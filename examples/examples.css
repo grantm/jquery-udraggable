@@ -9,6 +9,14 @@ p {
   line-height: 1.3;
 }
 
+blockquote {
+  font-family: serif;
+  font-style: italic;
+  font-size: 110%;
+  max-width: 50em;
+  margin-right: 5em;
+}
+
 pre.code {
   margin: 2em 1em 2em 0;
   padding: 1.3em;
