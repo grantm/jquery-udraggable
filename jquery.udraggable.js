@@ -37,6 +37,7 @@
         ,init: function() {
             var that = this;
             this.started = false;
+            this.normalise_position();
             if(this.options.long_press) {
                 this.$el
                     .on('uheldstart.uheldd', function(e) { that.start(e); })
@@ -73,6 +74,17 @@
             if(this.options.containment) {
                 this._initContainment();
             }
+        }
+
+        ,normalise_position: function() {
+            var pos = this.$el.position();
+            this.$el.css({
+                position: 'absolute',
+                top: pos.top,
+                left: pos.left,
+                right: 'auto',
+                bottom: 'auto'
+            });
         }
 
         ,start: function(e) {
