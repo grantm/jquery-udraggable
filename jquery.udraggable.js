@@ -199,7 +199,7 @@
             }
 
             if( o.containment === "parent" ) {
-                o.containment = this.el.parentNode;
+                o.containment = this.$el.offsetParent();
             }
 
             $c = $( o.containment );
