@@ -20,13 +20,36 @@
     var min   = Math.min;
     var max   = Math.max;
 
+    window.requestAnimationFrame = window.requestAnimationFrame || function(work) {
+        return setTimeout(work, 10);
+    };
+
+    window.cancelAnimationFrame = window.cancelAnimationFrame || function(id) {
+        return clearTimeout(id);
+    };
+
 
     // Constructor function
 
     var UDraggable = function (el, options) {
+        var that = this;
         this.el  = el;
         this.$el = $(el);
         this.options = $.extend({}, $.fn.udraggable.defaults, options)
+        this.positionElement = this.options.positionElement || this.positionElement;
+        this.updatePositionFrameHandler = function() {
+            delete that.queuedUpdate;
+            var pos = that.ui.position;
+            that.positionElement(that.started, pos.left, pos.top)
+            if(that.options.dragUpdate) {
+                that.options.dragUpdate.apply(that.el, [that.ui]);
+            }
+        };
+        this.queuePositionUpdate = function() {
+            if(!that.queuedUpdate) {
+                that.queuedUpdate = window.requestAnimationFrame(that.updatePositionFrameHandler);
+            }
+        };
         this.init();
     };
 
@@ -117,20 +140,19 @@
                 delta_x = 0;
             }
             var cur = {
-                left: this.ui.originalPosition.left + delta_x,
-                top:  this.ui.originalPosition.top  + delta_y
+                left: this.ui.originalPosition.left,
+                top:  this.ui.originalPosition.top
             };
+            if( !axis  ||  (axis === "x") ) {
+                cur.left += delta_x;
+            }
+            if( !axis  ||  (axis === "y") ) {
+                cur.top += delta_y;
+            }
             this._applyGrid(cur);
             this._applyContainment(cur);
-            var top_now  = parseInt(this.$el.css('top'),  10) || 0;
-            var left_now = parseInt(this.$el.css('left'), 10) || 0;
-            if( (cur.top !== top_now)  ||  (cur.left !== left_now) ) {
-                if( !axis  ||  (axis === "x") ) {
-                    this.$el.css("left", cur.left);
-                }
-                if( !axis  ||  (axis === "y") ) {
-                    this.$el.css("top",  cur.top);
-                }
+            var pos = this.ui.position;
+            if( (cur.top !== pos.top)  ||  (cur.left !== pos.left) ) {
                 this.ui.position.left = cur.left;
                 this.ui.position.top  = cur.top;
                 this.ui.offset.left   = cur.left;
@@ -138,18 +160,23 @@
                 if(this.options.drag) {
                     this.options.drag.apply(this.el, [e, this.ui]);
                 }
+                this.queuePositionUpdate();
             }
             return this._stopPropagation(e);
         }
 
         ,end: function(e) {
             if(this.started || this._start(e)) {
+                this.$el.removeClass("udraggable-dragging");
+                this.started = false;
+                if(this.queuedUpdate) {
+                    window.cancelAnimationFrame(this.queuedUpdate);
+                }
+                this.updatePositionFrameHandler();
                 if(this.options.stop) {
                     this.options.stop.apply(this.el, [e, this.ui]);
                 }
             }
-            this.$el.removeClass("udraggable-dragging");
-            this.started = false;
             return this._stopPropagation(e);
         }
 
@@ -166,6 +193,7 @@
                 return;
             }
             this.started = true;
+            this.queuePositionUpdate();
             if(this.options.start) {
                 this.options.start.apply(this.el, [e, this.ui]);
             }
@@ -230,6 +258,23 @@
             if(cont) {
                 cur.left = min( max(cur.left, cont[0]), cont[2] );
                 cur.top  = min( max(cur.top,  cont[1]), cont[3] );
+            }
+        }
+
+        ,positionElement: function(dragging, left, top) {
+            if(dragging) {
+                this.$el.css({
+                    left: 0,
+                    top: 0,
+                    transform: 'translate(' + left + 'px,' + top + 'px)'
+                });
+            }
+            else {
+                this.$el.css({
+                    left: left,
+                    top: top,
+                    transform: 'none'
+                });
             }
         }
 
