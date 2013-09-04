@@ -262,20 +262,7 @@
         }
 
         ,positionElement: function($el, dragging, left, top) {
-            if(dragging) {
-                $el.css({
-                    left: 0,
-                    top: 0,
-                    transform: 'translate(' + left + 'px,' + top + 'px)'
-                });
-            }
-            else {
-                $el.css({
-                    left: left,
-                    top: top,
-                    transform: 'none'
-                });
-            }
+            $el.css({ left: left, top: top });
         }
 
     };
