@@ -36,7 +36,8 @@
         this.el  = el;
         this.$el = $(el);
         this.options = $.extend({}, $.fn.udraggable.defaults, options)
-        this.positionElement = this.options.positionElement || this.positionElement;
+        this.positionElement  = this.options.positionElement  || this.positionElement;
+        this.getStartPosition = this.options.getStartPosition || this.getStartPosition;
         this.updatePositionFrameHandler = function() {
             delete that.queuedUpdate;
             var pos = that.ui.position;
@@ -111,14 +112,13 @@
         }
 
         ,start: function(e) {
-            var start_x = parseInt(this.$el.css('left'), 10) || 0;
-            var start_y = parseInt(this.$el.css('top'),  10) || 0;
+            var start = this.getStartPosition(this.$el);
             this._initContainment();
             this.ui = {
                 helper:           this.$el,
-                offset:           { top: start_y, left: start_x},
-                originalPosition: { top: start_y, left: start_x},
-                position:         { top: start_y, left: start_x},
+                offset:           { top: start.y, left: start.x},
+                originalPosition: { top: start.y, left: start.x},
+                position:         { top: start.y, left: start.x},
             };
             if(this.options.long_press) {
                 this._start(e);
@@ -259,6 +259,13 @@
                 cur.left = min( max(cur.left, cont[0]), cont[2] );
                 cur.top  = min( max(cur.top,  cont[1]), cont[3] );
             }
+        }
+
+        ,getStartPosition: function($el) {
+            return {
+                x: parseInt($el.css('left'), 10) || 0,
+                y: parseInt($el.css('top'),  10) || 0
+            };
         }
 
         ,positionElement: function($el, dragging, left, top) {
