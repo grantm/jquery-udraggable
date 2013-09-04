@@ -40,7 +40,7 @@
         this.updatePositionFrameHandler = function() {
             delete that.queuedUpdate;
             var pos = that.ui.position;
-            that.positionElement(that.started, pos.left, pos.top)
+            that.positionElement(that.$el, that.started, pos.left, pos.top)
             if(that.options.dragUpdate) {
                 that.options.dragUpdate.apply(that.el, [that.ui]);
             }
@@ -261,16 +261,16 @@
             }
         }
 
-        ,positionElement: function(dragging, left, top) {
+        ,positionElement: function($el, dragging, left, top) {
             if(dragging) {
-                this.$el.css({
+                $el.css({
                     left: 0,
                     top: 0,
                     transform: 'translate(' + left + 'px,' + top + 'px)'
                 });
             }
             else {
-                this.$el.css({
+                $el.css({
                     left: left,
                     top: top,
                     transform: 'none'
