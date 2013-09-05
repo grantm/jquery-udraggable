@@ -168,13 +168,13 @@ $('.sub-drag').udraggable({
         <pre class="code">$('#drag14').udraggable({
     distance: 15,
     containment: 'parent',
-    start: function() {
+    start: function () {
       $('#stat-mode').text('Dragging');
     },
-    stop: function() {
+    stop: function () {
       $('#stat-mode').text('Idle');
     },
-    drag: function(e, ui) {
+    drag: function (e, ui) {
       var pos = ui.position
       $('#stat-x').text(pos.left);
       $('#stat-y').text(pos.top);
@@ -196,9 +196,111 @@ $('.sub-drag').udraggable({
       </td>
     </tr>
 
+    <tr>
+      <td>
+        <p><a name="positionElement"></a>You can override the
+        <code>positionElement</code> function used to adjust the position of
+        the dragged element.  This example uses CSS transforms rather than the
+        default <code>left, top</code>.</p>
+        <pre class="code">$('#drag15').udraggable({
+    containment: 'parent',
+    positionElement: function ($el, dragging, x, y) {
+        if (dragging) {
+            $el.css({
+                left: 'auto',
+                top: 'auto',
+                transform: 'translate(' + x + 'px,' + y + 'px)'
+            });
+        }
+        else {
+            $el.css({
+                left: x,
+                top: y,
+                transform: 'none'
+            });
+        }
+    }
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag15">
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="handle"></a>This example defines a drag handle.  Although
+        the whole panel can be dragged, you can only drag it by the blue title
+        bar.</p>
+        <pre class="code">$('#dialog').udraggable({
+    containment: 'parent',
+    handle:      'h1'
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="dialog">
+            <h1>Personal Details</h1>
+            <form>
+              <label>Full name:</label>
+              <input type="text" class="text">
+              <label>Date of Birth:</label>
+              <input type="text" class="text">
+              <label>Nationality:</label>
+              <select>
+                <option>New Zealander</option>
+                <option>Other</option>
+              </select>
+              <hr>
+              <button type="submit" class="submit">Save</button>
+            </form>
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="handle"></a>The handle selector can reference multiple
+        'drag handle' elements.  In this somewhat silly example the dice can be
+        dragged but only by the dots.</p>
+        <pre class="code">$('.dice').udraggable({
+    containment: 'parent',
+    handle:      '.dot'
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div class="dice dice1">
+            <div class="dot dot1"></div>
+            <div class="dot dot2"></div>
+            <div class="dot dot3"></div>
+            <div class="dot dot4"></div>
+            <div class="dot dot5"></div>
+            <div class="dot dot6"></div>
+          </div>
+          <div class="dice dice2">
+            <div class="dot dot1"></div>
+            <div class="dot dot2"></div>
+            <div class="dot dot3"></div>
+            <div class="dot dot4"></div>
+            <div class="dot dot5"></div>
+            <div class="dot dot6"></div>
+          </div>
+        </div>
+      </td>
+    </tr>
+
   </table>
 
   <p>[<a href="../">Home</a>]</p>
+
+  <hr>
+
+  <p>Copyright &copy; 2013 Grant McLean</p>
 
   <script type="text/javascript">
 
@@ -242,17 +344,47 @@ $('.sub-drag').udraggable({
     $('#drag14').udraggable({
         distance: 15,
         containment: 'parent',
-        start: function() {
+        start: function () {
           $('#stat-mode').text('Dragging');
         },
-        stop: function() {
+        stop: function () {
           $('#stat-mode').text('Idle');
         },
-        drag: function(e, ui) {
+        drag: function (e, ui) {
           var pos = ui.position
           $('#stat-x').text(pos.left);
           $('#stat-y').text(pos.top);
         }
+    });
+
+    $('#drag15').udraggable({
+        containment: 'parent',
+        positionElement: function ($el, dragging, x, y) {
+            if (dragging) {
+                $el.css({
+                    left: 'auto',
+                    top: 'auto',
+                    transform: 'translate(' + x + 'px,' + y + 'px)'
+                });
+            }
+            else {
+                $el.css({
+                    left: x,
+                    top: y,
+                    transform: 'none'
+                });
+            }
+        }
+    });
+
+    $('#dialog').udraggable({
+        containment: 'parent',
+        handle:      'h1'
+    });
+
+    $('.dice').udraggable({
+        containment: 'parent',
+        handle:      '.dot'
     });
 
   </script>

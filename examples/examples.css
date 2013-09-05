@@ -59,6 +59,7 @@ table.options-list td:first-child {
 #drag3,
 #drag4,
 #drag14,
+#drag15,
 .sub-drag {
   position: absolute;
   top: 105px;
@@ -158,4 +159,67 @@ table.options-list td:first-child {
 #stat-x    { left: 185px; }
 #lbl-y     { left: 237px; }
 #stat-y    { left: 257px; }
+
+#dialog {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  width: 200px;
+  padding: 2px;
+  background-color: #dddddd;
+  font-family: sans-serif;
+  font-size: 12px;
+  border: 3px outset #dddddd;
+}
+
+#dialog h1 {
+  background-color: #0000aa;
+  color: #eeeeee;
+  margin: 0 0 10px 0;
+  padding: 3px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px inset #0000aa;
+  cursor: move;
+}
+
+#dialog label {
+  display: inline-block;
+  width: 85px;
+}
+
+#dialog input.text,
+#dialog select {
+  width: 104px;
+}
+
+#dialog button {
+  float: right;
+}
+
+.dice {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  background-color: #cc0000;
+  border-radius: 10px;
+}
+
+.dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #eeeeee;
+  border-radius: 6px;
+}
+
+.dot1 { top:  12px; left:  14px; }
+.dot2 { top:  12px; left:  46px; }
+.dot3 { top:  30px; left:  14px; }
+.dot4 { top:  30px; left:  46px; }
+.dot5 { top:  48px; left:  14px; }
+.dot6 { top:  48px; left:  46px; }
+.dice1 { top: 20px; left: 10px; }
+.dice2 { top: 60px; left: 150px; }
 
