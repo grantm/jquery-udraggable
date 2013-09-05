@@ -62,14 +62,17 @@
             var that = this;
             this.started = false;
             this.normalisePosition();
+            var $target = this.options.handle ?
+                          this.$el.find( this.options.handle ) :
+                          this.$el;
             if(this.options.longPress) {
-                this.$el
+                $target
                     .on('uheldstart.uheldd', function(e) { that.start(e); })
                     .on('uheldmove.uheldd',  function(e) { that.move(e);  })
                     .on('uheldend.uheldd',   function(e) { that.end(e);   });
             }
             else {
-                this.$el
+                $target
                     .on('udragstart', function(e) { that.start(e); })
                     .on('udragmove',  function(e) { that.move(e);  })
                     .on('udragend',   function(e) { that.end(e);   });
