@@ -20,13 +20,37 @@
     var min   = Math.min;
     var max   = Math.max;
 
+    window.requestAnimationFrame = window.requestAnimationFrame || function(work) {
+        return setTimeout(work, 10);
+    };
+
+    window.cancelAnimationFrame = window.cancelAnimationFrame || function(id) {
+        return clearTimeout(id);
+    };
+
 
     // Constructor function
 
     var UDraggable = function (el, options) {
+        var that = this;
         this.el  = el;
         this.$el = $(el);
         this.options = $.extend({}, $.fn.udraggable.defaults, options)
+        this.positionElement  = this.options.positionElement  || this.positionElement;
+        this.getStartPosition = this.options.getStartPosition || this.getStartPosition;
+        this.updatePositionFrameHandler = function() {
+            delete that.queuedUpdate;
+            var pos = that.ui.position;
+            that.positionElement(that.$el, that.started, pos.left, pos.top)
+            if(that.options.dragUpdate) {
+                that.options.dragUpdate.apply(that.el, [that.ui]);
+            }
+        };
+        this.queuePositionUpdate = function() {
+            if(!that.queuedUpdate) {
+                that.queuedUpdate = window.requestAnimationFrame(that.updatePositionFrameHandler);
+            }
+        };
         this.init();
     };
 
@@ -37,14 +61,18 @@
         ,init: function() {
             var that = this;
             this.started = false;
-            if(this.options.long_press) {
-                this.$el
+            this.normalisePosition();
+            var $target = this.options.handle ?
+                          this.$el.find( this.options.handle ) :
+                          this.$el;
+            if(this.options.longPress) {
+                $target
                     .on('uheldstart.uheldd', function(e) { that.start(e); })
                     .on('uheldmove.uheldd',  function(e) { that.move(e);  })
                     .on('uheldend.uheldd',   function(e) { that.end(e);   });
             }
             else {
-                this.$el
+                $target
                     .on('udragstart', function(e) { that.start(e); })
                     .on('udragmove',  function(e) { that.move(e);  })
                     .on('udragend',   function(e) { that.end(e);   });
@@ -75,17 +103,27 @@
             }
         }
 
+        ,normalisePosition: function() {
+            var pos = this.$el.position();
+            this.$el.css({
+                position: 'absolute',
+                top: pos.top,
+                left: pos.left,
+                right: 'auto',
+                bottom: 'auto'
+            });
+        }
+
         ,start: function(e) {
-            var start_x = parseInt(this.$el.css('left'), 10) || 0;
-            var start_y = parseInt(this.$el.css('top'),  10) || 0;
+            var start = this.getStartPosition(this.$el);
             this._initContainment();
             this.ui = {
                 helper:           this.$el,
-                offset:           { top: start_y, left: start_x},
-                originalPosition: { top: start_y, left: start_x},
-                position:         { top: start_y, left: start_x},
+                offset:           { top: start.y, left: start.x},
+                originalPosition: { top: start.y, left: start.x},
+                position:         { top: start.y, left: start.x},
             };
-            if(this.options.long_press) {
+            if(this.options.longPress) {
                 this._start(e);
             }
             return this._stopPropagation(e);
@@ -105,20 +143,19 @@
                 delta_x = 0;
             }
             var cur = {
-                left: this.ui.originalPosition.left + delta_x,
-                top:  this.ui.originalPosition.top  + delta_y
+                left: this.ui.originalPosition.left,
+                top:  this.ui.originalPosition.top
             };
+            if( !axis  ||  (axis === "x") ) {
+                cur.left += delta_x;
+            }
+            if( !axis  ||  (axis === "y") ) {
+                cur.top += delta_y;
+            }
             this._applyGrid(cur);
             this._applyContainment(cur);
-            var top_now  = parseInt(this.$el.css('top'),  10) || 0;
-            var left_now = parseInt(this.$el.css('left'), 10) || 0;
-            if( (cur.top !== top_now)  ||  (cur.left !== left_now) ) {
-                if( !axis  ||  (axis === "x") ) {
-                    this.$el.css("left", cur.left);
-                }
-                if( !axis  ||  (axis === "y") ) {
-                    this.$el.css("top",  cur.top);
-                }
+            var pos = this.ui.position;
+            if( (cur.top !== pos.top)  ||  (cur.left !== pos.left) ) {
                 this.ui.position.left = cur.left;
                 this.ui.position.top  = cur.top;
                 this.ui.offset.left   = cur.left;
@@ -126,18 +163,23 @@
                 if(this.options.drag) {
                     this.options.drag.apply(this.el, [e, this.ui]);
                 }
+                this.queuePositionUpdate();
             }
             return this._stopPropagation(e);
         }
 
         ,end: function(e) {
             if(this.started || this._start(e)) {
+                this.$el.removeClass("udraggable-dragging");
+                this.started = false;
+                if(this.queuedUpdate) {
+                    window.cancelAnimationFrame(this.queuedUpdate);
+                }
+                this.updatePositionFrameHandler();
                 if(this.options.stop) {
                     this.options.stop.apply(this.el, [e, this.ui]);
                 }
             }
-            this.$el.removeClass("udraggable-dragging");
-            this.started = false;
             return this._stopPropagation(e);
         }
 
@@ -154,6 +196,7 @@
                 return;
             }
             this.started = true;
+            this.queuePositionUpdate();
             if(this.options.start) {
                 this.options.start.apply(this.el, [e, this.ui]);
             }
@@ -187,7 +230,7 @@
             }
 
             if( o.containment === "parent" ) {
-                o.containment = this.el.parentNode;
+                o.containment = this.$el.offsetParent();
             }
 
             $c = $( o.containment );
@@ -221,6 +264,17 @@
             }
         }
 
+        ,getStartPosition: function($el) {
+            return {
+                x: parseInt($el.css('left'), 10) || 0,
+                y: parseInt($el.css('top'),  10) || 0
+            };
+        }
+
+        ,positionElement: function($el, dragging, left, top) {
+            $el.css({ left: left, top: top });
+        }
+
     };
 
 
@@ -250,7 +304,7 @@
          axis:        null
         ,delay:       0
         ,distance:    0
-        ,long_press:  false
+        ,longPress:   false
         // callbacks
         ,drag:        null
         ,start:       null
