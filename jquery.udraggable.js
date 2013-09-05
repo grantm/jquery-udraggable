@@ -1,5 +1,5 @@
 /*
- * jQuery udraggable plugin v0.1.0
+ * jQuery udraggable plugin v0.2.0
  * Copyright (c) 2013 Grant McLean (grant@mclean.net.nz)
  *
  * Homepage: https://github.com/grantm/jquery-udraggable
