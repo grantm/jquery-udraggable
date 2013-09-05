@@ -62,7 +62,7 @@
             var that = this;
             this.started = false;
             this.normalisePosition();
-            if(this.options.long_press) {
+            if(this.options.longPress) {
                 this.$el
                     .on('uheldstart.uheldd', function(e) { that.start(e); })
                     .on('uheldmove.uheldd',  function(e) { that.move(e);  })
@@ -120,7 +120,7 @@
                 originalPosition: { top: start.y, left: start.x},
                 position:         { top: start.y, left: start.x},
             };
-            if(this.options.long_press) {
+            if(this.options.longPress) {
                 this._start(e);
             }
             return this._stopPropagation(e);
@@ -301,7 +301,7 @@
          axis:        null
         ,delay:       0
         ,distance:    0
-        ,long_press:  false
+        ,longPress:   false
         // callbacks
         ,drag:        null
         ,start:       null
