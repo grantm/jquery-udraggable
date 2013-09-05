@@ -6,7 +6,7 @@
         "drag",
         "touch"
     ],
-    "version": "0.1.0",
+    "version": "0.2.0",
     "author": {
         "name": "Grant McLean",
         "email": "grant@mclean.net.nz",
@@ -32,7 +32,7 @@
     "bugs": "https://github.com/grantm/jquery-udraggable/issues",
     "homepage": "http://grantm.github.com/jquery-udraggable/",
     "docs": "http://grantm.github.com/jquery-udraggable/",
-    "demo": "http://grantm.github.com/jquery-udraggable/#examples",
+    "demo": "http://grantm.github.io/jquery-udraggable/examples/options.html",
     "dependencies": {
         "jquery": ">=1.7"
     }
