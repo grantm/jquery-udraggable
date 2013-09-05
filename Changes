@@ -1,0 +1,15 @@
+Change log for jquery.udraggable plugin.
+
+For full commit history see:
+
+    https://github.com/grantm/jquery-udraggable/commits/master
+
+0.2.0  2013-09-06
+    * "parent" containment now refers to positioning parent - offsetParent()
+    * element position now normalised to top & left if right or bottom
+    * redraws now synced via requestAnimationFrame
+    * new "getStartPosition" and "positionElement" options
+    * new "handle" option
+
+0.1.0  2013-08-29
+    * initial release
