@@ -108,8 +108,11 @@
                   <li><a href="#delay">delay</a></li>
                   <li><a href="#drag">drag</a></li>
                   <li><a href="#distance">distance</a></li>
+                  <li><a href="#getStartPosition">getStartPosition</a></li>
                   <li><a href="#grid">grid</a></li>
-                  <li><a href="#long_press">long_press</a></li>
+                  <li><a href="#handle">handle</a></li>
+                  <li><a href="#longPress">longPress</a></li>
+                  <li><a href="#positionElement">positionElement</a></li>
                   <li><a href="#start">start</a></li>
                   <li><a href="#stop">stop</a></li>
                 </ul>
@@ -152,13 +155,15 @@
                   operation should be contained.  Acceptable values are
                   the string <code>"parent"</code> or an array of pixel offset
                   values defining a rectangle: <code>[left, top, right, bottom]</code>.</p>
+                  <p><code>"parent"</code> refers to the 'offset parent' - the
+                  closest ancestor element that is positioned.</p>
+
                   <p>The draggable element is assumed to be positioned relative
-                  to its parent element (see "caveats" above) and if the array of
-                  offsets is used, the values are relative to the positioning parent.</p>
-                  <p><em>Note: it does make sense in some circumstances for the
-                  'top' and 'left' values to be negative numbers.</em></p>
-                </td>
-              </tr>
+                  to its offset parent element (see "caveats" above) and if the
+                  array of offsets is used, the values are relative to the
+                  offset parent.</p> <p><em>Note: it does make sense in
+                  some circumstances for the 'top' and 'left' values to be
+                  negative numbers.</em></p> </td> </tr>
 
               <tr>
                 <td><a name="delay"></a><code>delay</code></td>
@@ -176,7 +181,8 @@
                   <p>This option allows you to specify a callback function
                   that will be invoked as the element is dragged.  The function
                   will be passed an <code>event</code> object and a <code>ui</code>
-                  object.</p>
+                  object.  Your function will be called <em>after</em> the
+                  position of the element has been adjusted.</p>
                 </td>
               </tr>
 
@@ -192,20 +198,65 @@
               </tr>
 
               <tr>
+                <td><a name="getStartPosition"></a><code>getStartPosition</code></td>
+                <td>
+                  <p>You can use this option to replace the code that calculates
+                  the initial position of the element before the drag begins.
+                  The default implementation simply reads the <code>top</code>
+                  and <code>left</code> CSS properties.</p>
+                  <p>The function you provide will be passed the target element
+                  in a jQuery wrapper.</p>
+                  <p><em>Note: this option is not supported by the jQueryUI
+                  draggable</em>.</p>
+                </td>
+              </tr>
+
+              <tr>
                 <td><a name="grid"></a><code>grid</code></td>
                 <td>
-                  <p>A array of two integers (<code>[x, y]</code>) specifying
+                  <p>An array of two integers (<code>[x, y]</code>) specifying
                   the pixel size of a grid that should be used to constrain the
                   drag and give it a snap-to-grid behaviour.</p>
                 </td>
               </tr>
 
               <tr>
-                <td><a name="long_press"></a><code>long_press</code></td>
+                <td><a name="handle"></a><code>handle</code></td>
+                <td>
+                  <p>Optional selector for a child element to be used as a drag
+                  handle.  A drag will not start unless the initial mousedown /
+                  touchstart event occurs on the selected element(s).</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td><a name="longPress"></a><code>longPress</code></td>
                 <td>
                   <p>Specify a boolean <code>true</code> value if the drag
                   should require a "long press" to start (i.e. press and hold
                   before starting the drag).</p>
+                  <p><em>Note: this option is not supported by the jQueryUI
+                  draggable</em>.</p>
+                </td>
+              </tr>
+
+              <tr>
+                <td><a name="positionElement"></a><code>positionElement</code></td>
+                <td>
+                  <p>You can use this option to replace the code that positions
+                  the element at each step of the drag. The default
+                  implementation positions the element by adjusting its
+                  <code>top</code> and <code>left</code> CSS properties.</p>
+                  <p>The function you provide will be passed 4 arguments:</p>
+                  <ul>
+                    <li><code>$el</code> &mdash; the element to be positioned
+                    (jQuery wrapped)</li>
+                    <li><code>dragging</code> &mdash; boolean indicating whether a
+                    drag is in process, this value will be false for the final
+                    update in a drag</li>
+                    <li><code>x</code> &mdash; the new x (left) position</li>
+                    <li><code>y</code> &mdash; the new y (top) position</li>
+                  </ul>
                   <p><em>Note: this option is not supported by the jQueryUI
                   draggable</em>.</p>
                 </td>
