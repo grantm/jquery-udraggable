@@ -301,6 +301,9 @@
                 $this.data('udraggable', data);
             }
             if (typeof option === 'string') {  // option is a method - call it
+                if(typeof data[option] !== 'function') {
+                    throw "jquery.udraggable has no '" + option + "' method";
+                }
                 var result = data[option].apply(data, args);
                 if (result !== undefined) {
                     results.push( result );
