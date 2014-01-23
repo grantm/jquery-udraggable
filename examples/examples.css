@@ -60,6 +60,9 @@ table.options-list td:first-child {
 #drag4,
 #drag14,
 #drag15,
+#drag16,
+#drag17,
+#drag18,
 .sub-drag {
   position: absolute;
   top: 105px;
@@ -222,4 +225,27 @@ table.options-list td:first-child {
 .dot6 { top:  48px; left:  46px; }
 .dice1 { top: 20px; left: 10px; }
 .dice2 { top: 60px; left: 150px; }
+
+#destroy-btn {
+  width: 80px;
+  position: absolute;
+  bottom: 6px;
+  left: 110px;
+}
+
+#disable-btn,
+#sml-grid-btn {
+  width: 80px;
+  position: absolute;
+  bottom: 6px;
+  left: 45px;
+}
+
+#enable-btn,
+#big-grid-btn {
+  width: 80px;
+  position: absolute;
+  bottom: 6px;
+  left: 175px;
+}
 

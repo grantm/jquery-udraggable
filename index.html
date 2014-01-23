@@ -121,7 +121,10 @@
               <div class="span4">
                 <h3>Methods</h3>
                 <ul>
-                  <li><a href="#start">option</a></li>
+                  <li><a href="#destroy">destroy</a></li>
+                  <li><a href="#disable">disable</a></li>
+                  <li><a href="#enable">enable</a></li>
+                  <li><a href="#option">option</a></li>
                 </ul>
               </div>
 
@@ -335,6 +338,40 @@
               </tr>
 
               <tr>
+                <td><a name="destroy"></a><code>destroy</code></td>
+                <td>
+
+                  <p>This method will completely remove the
+                  <code>udraggable</code> behaviour from the target
+                  element.  The element position will be left unchanged.</p>
+
+                </td>
+              </tr>
+
+              <tr>
+                <td><a name="disable"></a><code>disable</code></td>
+                <td>
+
+                  <p>This method will temporarily disable the
+                  <code>udraggable</code> behaviour on the target element.  A
+                  later call to the <code>enable</code> method will restore the
+                  behaviour with the original options.</p>
+
+                </td>
+              </tr>
+
+              <tr>
+                <td><a name="enable"></a><code>enable</code></td>
+                <td>
+
+                  <p>This method will restore the <code>udraggable</code>
+                  behaviour on a target element that was turned off with the
+                  <code>disable</code> method.</p>
+
+                </td>
+              </tr>
+
+              <tr>
                 <td><a name="option"></a><code>option</code></td>
                 <td>
 
@@ -368,7 +405,12 @@
               <dd>Various examples demonstrating a range of different option
               settings to change drag constraints.</dd>
 
-              <dt><a href="https://github.com/grantm/tksweb">Example 2 - TKS-Web</a></dt>
+              <dt><a href="examples/methods.html">Example 2 - Methods</a></dt>
+
+              <dd>Examples demonstrating method calls to alter the
+              udraggable behaviour after initial setup.</dd>
+
+              <dt><a href="https://github.com/grantm/tksweb">Example 3 - TKS-Web</a></dt>
 
               <dd>The TKS-Web application is a web-based timesheeting system
               that uses jquery.udraggable.js to facilitate dragging and
@@ -379,7 +421,7 @@
 
             <hr>
 
-            <p>Copyright &copy; 2013 Grant McLean</p>
+            <p>Copyright &copy; 2013-2014 Grant McLean</p>
 
           </div><!--/span-->
         </div><!--/row-->

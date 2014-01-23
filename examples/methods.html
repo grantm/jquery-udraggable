@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>jQuery.udraggable: Methods</title>
+  <link rel="stylesheet" type="text/css" href="examples.css">
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="../jquery.event.ue.js"></script>
+  <script type="text/javascript" src="../jquery.udraggable.js"></script>
+</head>
+<body>
+
+  <h1>jQuery.udraggable: Methods</h1>
+
+  <p>This is a demo page for the <a href="../">jquery.udraggable.js plugin</a>:</p>
+
+  <blockquote>“This plugin provides an API similar to jQueryUI's draggable but
+  with support for unified mouse and touch events. It builds on Michael S.
+  Mikowski's jquery.event.ue unified event plugin.”</blockquote>
+
+  <p>The following examples illustrate the use of various methods to
+  change the udraggable behaviour after the initial setup.</p>
+
+  <table class="options-list">
+
+    <tr>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="destroy"></a>You can call the <code>destroy</code> method
+        to completely remove the udraggable behaviour from the target element.</p>
+        <pre class="code">$('#drag16').udraggable({
+    containment: 'parent'
+});
+
+$('#destroy-btn').click(function () {
+    $('#drag16').udraggable('destroy');
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag16"></div>
+          <button id="destroy-btn" title="click to remove udraggable behaviour from target element">destroy</button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="disable"></a>You can call the <code>disable</code> and
+        <code>enable</code> methods to temporarily disable the udraggable
+        behaviour and later enable it again.</p>
+        <pre class="code">$('#drag17').udraggable({
+    containment: 'parent'
+});
+
+$('#disable-btn').click(function () {
+    $('#drag17').udraggable('disable');
+});
+
+$('#enable-btn').click(function () {
+    $('#drag17').udraggable('enable');
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag17"></div>
+          <button id="disable-btn" title="click to disable udraggable behaviour">disable</button>
+          <button id="enable-btn" title="click to enable udraggable behaviour">enable</button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="option"></a>You can call the <code>option</code> method
+        to set a new value for an option after the udraggable
+        behaviour has been initialised.</p>
+        <pre class="code">$('#drag18').udraggable({
+    containment: 'parent'
+});
+
+$('#sml-grid-btn').click(function () {
+    $('#drag18').udraggable('option', {
+        grid: [10, 10]
+    });
+});
+
+$('#big-grid-btn').click(function () {
+    $('#drag18').udraggable('option', {
+        grid: [30, 30]
+    });
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="drag18"></div>
+          <button id="sml-grid-btn" title="click for: snap to 10px grid">10px grid</button>
+          <button id="big-grid-btn" title="click for: snap to 30px grid">30px grid</button>
+        </div>
+      </td>
+    </tr>
+
+  </table>
+
+  <p>[<a href="../">Home</a>]</p>
+
+  <hr>
+
+  <p>Copyright &copy; 2013-2014 Grant McLean</p>
+
+  <script type="text/javascript">
+
+    $('#drag16').udraggable({
+        containment: 'parent'
+    });
+
+    $('#destroy-btn').click(function () {
+        $('#drag16').udraggable('destroy');
+    });
+
+    $('#drag17').udraggable({
+        containment: 'parent'
+    });
+
+    $('#disable-btn').click(function () {
+        $('#drag17').udraggable('disable');
+    });
+
+    $('#enable-btn').click(function () {
+        $('#drag17').udraggable('enable');
+    });
+
+    $('#drag18').udraggable({
+        containment: 'parent'
+    });
+
+    $('#sml-grid-btn').click(function () {
+        $('#drag18').udraggable('option', {
+            grid: [10, 10]
+        });
+    });
+
+    $('#big-grid-btn').click(function () {
+        $('#drag18').udraggable('option', {
+            grid: [30, 30]
+        });
+    });
+
+  </script>
+
+</body>
+</html>
