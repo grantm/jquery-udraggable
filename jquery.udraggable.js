@@ -67,16 +67,24 @@
                           this.$el;
             if (this.options.longPress) {
                 $target
-                    .on('uheldstart.uheldd', function(e) { that.start(e); })
-                    .on('uheldmove.uheldd',  function(e) { that.move(e);  })
-                    .on('uheldend.uheldd',   function(e) { that.end(e);   });
+                    .on('uheldstart.udraggable', function(e) { that.start(e); })
+                    .on('uheldmove.udraggable',  function(e) { that.move(e);  })
+                    .on('uheldend.udraggable',   function(e) { that.end(e);   });
             }
             else {
                 $target
-                    .on('udragstart', function(e) { that.start(e); })
-                    .on('udragmove',  function(e) { that.move(e);  })
-                    .on('udragend',   function(e) { that.end(e);   });
+                    .on('udragstart.udraggable', function(e) { that.start(e); })
+                    .on('udragmove.udraggable',  function(e) { that.move(e);  })
+                    .on('udragend.udraggable',   function(e) { that.end(e);   });
             }
+        },
+
+        destroy: function() {
+            var $target = this.options.handle ?
+                          this.$el.find( this.options.handle ) :
+                          this.$el;
+            $target.off('.udraggable');
+            this.$el.removeData('udraggable');
         },
 
         option: function() {
