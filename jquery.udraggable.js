@@ -60,6 +60,7 @@
 
         init: function() {
             var that = this;
+            this.disabled = false;
             this.started = false;
             this.normalisePosition();
             var $target = this.options.handle ?
@@ -85,6 +86,14 @@
                           this.$el;
             $target.off('.udraggable');
             this.$el.removeData('udraggable');
+        },
+
+        disable: function() {
+            this.disabled = true;
+        },
+
+        enable: function() {
+            this.disabled = false;
         },
 
         option: function() {
@@ -125,6 +134,9 @@
         },
 
         start: function(e) {
+            if (this.disabled) {
+                return;
+            }
             var start = this.getStartPosition(this.$el);
             this._initContainment();
             this.ui = {
@@ -140,7 +152,7 @@
         },
 
         move: function(e) {
-            if (!this.started && !this._start(e)) {
+            if (this.disabled || (!this.started && !this._start(e))) {
                 return;
             }
             var delta_x = e.px_current_x - e.px_start_x;
