@@ -1,6 +1,6 @@
 /*
- * jQuery udraggable plugin v0.2.0
- * Copyright (c) 2013 Grant McLean (grant@mclean.net.nz)
+ * jQuery udraggable plugin v0.3.0
+ * Copyright (c) 2013-2014 Grant McLean (grant@mclean.net.nz)
  *
  * Homepage: https://github.com/grantm/jquery-udraggable
  *
@@ -60,6 +60,7 @@
 
         init: function() {
             var that = this;
+            this.disabled = false;
             this.started = false;
             this.normalisePosition();
             var $target = this.options.handle ?
@@ -67,16 +68,32 @@
                           this.$el;
             if (this.options.longPress) {
                 $target
-                    .on('uheldstart.uheldd', function(e) { that.start(e); })
-                    .on('uheldmove.uheldd',  function(e) { that.move(e);  })
-                    .on('uheldend.uheldd',   function(e) { that.end(e);   });
+                    .on('uheldstart.udraggable', function(e) { that.start(e); })
+                    .on('uheldmove.udraggable',  function(e) { that.move(e);  })
+                    .on('uheldend.udraggable',   function(e) { that.end(e);   });
             }
             else {
                 $target
-                    .on('udragstart', function(e) { that.start(e); })
-                    .on('udragmove',  function(e) { that.move(e);  })
-                    .on('udragend',   function(e) { that.end(e);   });
+                    .on('udragstart.udraggable', function(e) { that.start(e); })
+                    .on('udragmove.udraggable',  function(e) { that.move(e);  })
+                    .on('udragend.udraggable',   function(e) { that.end(e);   });
             }
+        },
+
+        destroy: function() {
+            var $target = this.options.handle ?
+                          this.$el.find( this.options.handle ) :
+                          this.$el;
+            $target.off('.udraggable');
+            this.$el.removeData('udraggable');
+        },
+
+        disable: function() {
+            this.disabled = true;
+        },
+
+        enable: function() {
+            this.disabled = false;
         },
 
         option: function() {
@@ -117,6 +134,9 @@
         },
 
         start: function(e) {
+            if (this.disabled) {
+                return;
+            }
             var start = this.getStartPosition(this.$el);
             this._initContainment();
             this.ui = {
@@ -132,7 +152,7 @@
         },
 
         move: function(e) {
-            if (!this.started && !this._start(e)) {
+            if (this.disabled || (!this.started && !this._start(e))) {
                 return;
             }
             var delta_x = e.px_current_x - e.px_start_x;
@@ -293,6 +313,9 @@
                 $this.data('udraggable', data);
             }
             if (typeof option === 'string') {  // option is a method - call it
+                if(typeof data[option] !== 'function') {
+                    throw "jquery.udraggable has no '" + option + "' method";
+                }
                 var result = data[option].apply(data, args);
                 if (result !== undefined) {
                     results.push( result );
