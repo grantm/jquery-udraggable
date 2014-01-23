@@ -4,6 +4,10 @@ For full commit history see:
 
     https://github.com/grantm/jquery-udraggable/commits/master
 
+0.3.0  2014-01-23
+    * new methods: destroy, disable, enable
+    * throw an exception if unsupported method called
+
 0.2.0  2013-09-06
     * "parent" containment now refers to positioning parent - offsetParent()
     * element position now normalised to top & left if right or bottom
