@@ -63,6 +63,7 @@ table.options-list td:first-child {
 #drag16,
 #drag17,
 #drag18,
+#drag19,
 .sub-drag {
   position: absolute;
   top: 105px;
@@ -234,7 +235,8 @@ table.options-list td:first-child {
 }
 
 #disable-btn,
-#sml-grid-btn {
+#sml-grid-btn,
+#zone-red-btn {
   width: 80px;
   position: absolute;
   bottom: 6px;
@@ -242,10 +244,35 @@ table.options-list td:first-child {
 }
 
 #enable-btn,
-#big-grid-btn {
+#big-grid-btn,
+#zone-blue-btn {
   width: 80px;
   position: absolute;
   bottom: 6px;
   left: 175px;
+}
+
+#zone-red {
+  position: absolute;
+  width: 120px;
+  height: 150px;
+  left: 89px;
+  top: 29px;
+  background-color: #ff6666;
+  border: 1px solid #881111;
+  opacity: 0.4;
+  border-radius: 4px;
+}
+
+#zone-blue {
+  position: absolute;
+  width: 240px;
+  height: 80px;
+  left: 29px;
+  top: 59px;
+  background-color: #6666ff;
+  border: 1px solid #111188;
+  opacity: 0.4;
+  border-radius: 4px;
 }
 

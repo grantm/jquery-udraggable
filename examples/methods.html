@@ -76,7 +76,7 @@ $('#enable-btn').click(function () {
 
     <tr>
       <td>
-        <p><a name="option"></a>You can call the <code>option</code> method
+        <p><a name="option-grid"></a>You can call the <code>option</code> method
         to set a new value for an option after the udraggable
         behaviour has been initialised.</p>
         <pre class="code">$('#drag18').udraggable({
@@ -100,6 +100,37 @@ $('#big-grid-btn').click(function () {
           <div id="drag18"></div>
           <button id="sml-grid-btn" title="click for: snap to 10px grid">10px grid</button>
           <button id="big-grid-btn" title="click for: snap to 30px grid">30px grid</button>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <p><a name="option-containment"></a>This example also calls the <code>option</code>
+        method - in this case to alter the 'containment' setting.</p>
+        <pre class="code">$('#drag19').udraggable({
+    containment: 'parent'
+});
+
+$('#zone-red-btn').click(function () {
+    $('#drag19').udraggable('option', {
+        containment: [90, 30, 180, 150]
+    });
+});
+
+$('#zone-blue-btn').click(function () {
+    $('#drag19').udraggable('option', {
+        containment: [30, 60, 240, 110]
+    });
+});</pre>
+      </td>
+      <td>
+        <div class="arena">
+          <div id="zone-red"></div>
+          <div id="zone-blue"></div>
+          <div id="drag19"></div>
+          <button id="zone-red-btn" title="click for: constrain to red zone">red zone</button>
+          <button id="zone-blue-btn" title="click for: constrain to blue zone">blue zone</button>
         </div>
       </td>
     </tr>
@@ -147,6 +178,22 @@ $('#big-grid-btn').click(function () {
     $('#big-grid-btn').click(function () {
         $('#drag18').udraggable('option', {
             grid: [30, 30]
+        });
+    });
+
+    $('#drag19').udraggable({
+        containment: 'parent'
+    });
+
+    $('#zone-red-btn').click(function () {
+        $('#drag19').udraggable('option', {
+            containment: [90, 30, 180, 150]
+        });
+    });
+
+    $('#zone-blue-btn').click(function () {
+        $('#drag19').udraggable('option', {
+            containment: [30, 60, 240, 110]
         });
     });
 
