@@ -36,6 +36,7 @@
         this.el  = el;
         this.$el = $(el);
         this.options = $.extend({}, $.fn.udraggable.defaults, options);
+        this.currZoom = this.$el.attr('zoom');
         this.positionElement  = this.options.positionElement  || this.positionElement;
         this.getStartPosition = this.options.getStartPosition || this.getStartPosition;
         this.updatePositionFrameHandler = function() {
@@ -169,10 +170,10 @@
                 top:  this.ui.originalPosition.top
             };
             if (!axis  ||  (axis === "x")) {
-                cur.left += delta_x;
+                cur.left += (delta_x / this.currZoom);
             }
             if (!axis  ||  (axis === "y")) {
-                cur.top += delta_y;
+                cur.top += (delta_y / this.currZoom);
             }
             this._applyGrid(cur);
             this._applyContainment(cur);
