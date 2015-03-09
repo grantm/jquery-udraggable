@@ -38,6 +38,7 @@
         this.options = $.extend({}, $.fn.udraggable.defaults, options);
         this.positionElement  = this.options.positionElement  || this.positionElement;
         this.getStartPosition = this.options.getStartPosition || this.getStartPosition;
+        this.normalisePosition = this.options.normalisePosition || this.normalisePosition;
         this.updatePositionFrameHandler = function() {
             delete that.queuedUpdate;
             var pos = that.ui.position;
