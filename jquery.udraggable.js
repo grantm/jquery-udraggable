@@ -63,7 +63,7 @@
             var that = this;
             this.disabled = false;
             this.started = false;
-            this.normalisePosition();
+            this.normalisePosition(this.$el);
             var $target = this.options.handle ?
                           this.$el.find( this.options.handle ) :
                           this.$el;
@@ -123,9 +123,9 @@
             }
         },
 
-        normalisePosition: function() {
-            var pos = this.$el.position();
-            this.$el.css({
+        normalisePosition: function($el) {
+            var pos = $el.position();
+            $el.css({
                 position: 'absolute',
                 top: pos.top,
                 left: pos.left,
