@@ -191,11 +191,18 @@ table.options-list td:first-child {
 #dialog label {
   display: inline-block;
   width: 85px;
+  padding: 0 0 0 2px;
 }
 
-#dialog input.text,
+#dialog input.text {
+  width: 95px;
+  padding: 1px 2px;
+  margin: 1px 0;
+}
+
 #dialog select {
   width: 104px;
+  padding: 1px 0px;
 }
 
 #dialog button {
