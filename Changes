@@ -4,6 +4,9 @@ For full commit history see:
 
     https://github.com/grantm/jquery-udraggable/commits/master
 
+0.3.0  2015-03-10
+    * patch from Lukas Dietrich to allow normalisePosition() to be overridden
+
 0.3.0  2014-01-23
     * new methods: destroy, disable, enable
     * throw an exception if unsupported method called
