@@ -1,0 +1,28 @@
+{
+  "name": "jquery-udraggable",
+  "main": "jquery.udraggable.js",
+  "homepage": "https://github.com/okeul/jquery-udraggable",
+  "authors": [
+    "Olivier Keul <okeul@clever-age.com>"
+  ],
+  "description": "jQuery plugin to make elements draggable by mouse or touch.",
+  "keywords": [
+    "draggable",
+    "udraggable",
+    "jQuery"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  }
+}
