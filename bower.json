@@ -3,13 +3,12 @@
   "main": "jquery.udraggable.js",
   "homepage": "https://github.com/okeul/jquery-udraggable",
   "authors": [
-    "Olivier Keul <okeul@clever-age.com>"
+    "Grant McLean <grant@mclean.net.nz>"
   ],
-  "description": "jQuery plugin to make elements draggable by mouse or touch.",
+  "description": "jQuery plugin for making elements draggable with both mouse and touch support.  A (tiny) subset of the functionality of jQueryUI's 'draggable' widget, but with touch support added.",
   "keywords": [
-    "draggable",
-    "udraggable",
-    "jQuery"
+    "drag",
+    "touch"
   ],
   "license": "MIT",
   "moduleType": [
